@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+		ul li{
+			width:23px;
+			height:40px;
+			border:1px solid #eee;
+			float:left;
+			text-align:center;
+			line-height:40px;
+		}
+		.ul{
+			width:125px;
+			height:42px;
+			overflow:hidden;
+		}
+		ul{
+			width:100%;
+			height:42px;
+			list-style:none;
+		}
+		.right{
+			position:absolute;
+		}
+		.left{
+			position:absolute;
+			margin-left:100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="ul">
+		<ul>
+			
+		</ul>
+	</div>
+	
+	<div class="left">></div>
+	<div class="right"><</div>
+	<script type="text/javascript">
+		var num = 0;
+		var ul = document.querySelector("ul");
+		var html = '';
+		for (var i = 1; i < 20; i++) {
+			html += '<li>'+i+'</li>';
+		}
+		ul.innerHTML = html;
+		ul.style.width = (19*25)+"px";
+		var li = document.querySelectorAll("ul li");
+		var left = document.querySelector(".left");
+		var right = document.querySelector(".right");
+		li[0].style.backgroundColor = "red";
+		for (var i = 0; i < li.length; i++) {
+			li[i].index= i;
+			li[i].onclick = function(){
+				for (var i = 0; i < li.length; i++) {
+					li[i].style.backgroundColor = "#fff";
+				}
+				li[this.index].style.backgroundColor = "red";
+				if(this.index>2 && this.index <= li.length-3){
+					ul.style.marginLeft = ((this.index-2)*-25)+"px";
+					zhixing(-(this.index))
+				}else if(this.index <= 2){
+					ul.style.marginLeft = "0px";
+					zhixing(-(this.index))
+				}else if(this.index == li.length-2){
+					ul.style.marginLeft = ((this.index-3)*-25)+"px";
+					zhixing(-(this.index))
+				}else if(this.index == li.length-1){
+					zhixing(-(this.index))
+				}
+			}
+		}
+		function zhixing(num){
+			console.log(num)
+			left.onclick = function(){
+				num--;
+				console.log(num)
+				if(num <= -(li.length)){
+					num = -(li.length-1);
+				}else{
+					for (var i = 0; i < li.length; i++) {
+						li[i].style.backgroundColor = "#fff";
+					}
+					li[-(num)].style.backgroundColor = "red";
+					if(num<=-3 && num >= -(li.length-3)){
+						ul.style.marginLeft = ((num+2)*25)+"px";
+					}
+				}
+			}
+			right.onclick = function(){
+				console.log(num)
+				num++;
+				if(num >= 1){
+					num = 0;
+				}else{
+					for (var i = 0; i < li.length; i++) {
+						li[i].style.backgroundColor = "#fff";
+					}
+					li[-(num)].style.backgroundColor = "red";
+					if(num<=-2 && num >= -(li.length-3)){
+						ul.style.marginLeft = ((num+2)*25)+"px";
+					}
+				}
+			}
+		}
+		zhixing(num);
+	</script>
+</body>
+</html>
