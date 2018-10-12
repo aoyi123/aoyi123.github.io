@@ -1,11 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-	
-</head>
-<body>
-	<div>123456</div>
-</body>
-</html>
+<！DOCTYPE html>
+< html >
+< 头 >
+	< meta  charset = “ utf-8 ” >
+	< title > </ title >
+	< script  type = “ text / javascript ”  src = “ jquery-3.2.1.js ” > </ script >
+	< style  type = “ text / css ” >
+		身体 {
+			背景：粉红色 ;
+		}
+		.div {
+			宽度： 100 像素 ;
+			身高： 100 像素 ;
+			border-radius： 50 ％ ;
+			背景：红色 ;
+			位置：绝对 ;
+			左： 50 ％ ;
+			上： 300 px ;
+		}
+		p {
+			位置：绝对 ;
+			宽度： 20 像素 ;
+			身高： 20 像素 ;
+			border-radius： 50 ％ ;
+			背景：＃000 ;
+		}
+	</ style >
+</ head >
+< body >
+	< div  class = “ div ” > </ div >
+	< script  type = “ text / javascript ” >
+		var num =  0 ;
+		$（“。 div ”）。click（function（）{
+			num ++ ;
+			$（“。 div ”）。追加（“ <p class ='l ” + num + “ 'style ='left：” +（40）+ “ px; top：” +（25）+ “ px'> </ p> ”）;
+			$（“。 l ” + num + “ ”）。动画（{
+				“宽度”：“ 150px ”，
+				“身高”：“ 150px ”，
+				“不透明度”：“ 0 ”，
+				“左”：“ - 25px ”，
+				“顶部”：“ - 40px ”
+			}，1200）
+			var se =  $（“ p ”）;
+			为（VAR我=  0 ;我<  SE。长度 ;我++）{
+				控制台。登录（SE。EQ（I）。CSS（“不透明度”））
+				如果（SE。当量（I）。的CSS（“不透明度”）==  “ 0 ”）{
+					se。eq（i）。remove（）;
+				}
+			}
+		}）
+	</ script >
+</ body >
+</ html >
